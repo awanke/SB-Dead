@@ -8,7 +8,7 @@ import cms.service.UserRoleService;
 import cms.service.UserService;
 import cms.vo.Page;
 import cms.web.admin.base.BaseController;
-import cms.web.shiro.ShiroRealmImpl;
+import cms.web.shiro.ShiroDbRealm;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -34,7 +34,7 @@ public class UserController extends BaseController {
     @Autowired
     private UserRoleService userRoleService;
     @Autowired
-    private ShiroRealmImpl shiroDbRealm;
+    private ShiroDbRealm shiroDbRealm;
 
     @RequestMapping(value = StringUtils.EMPTY)
     public String list(@RequestParam(value = "cName", defaultValue = StringUtils.EMPTY) String cName,

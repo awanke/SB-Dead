@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE type>
+<decorators defaultdir="/decorator/">
+    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+    <excludes>
+        <pattern>/admin</pattern>
+        <pattern>/admin/</pattern>
+        <pattern>/admin/login*</pattern>
+        <pattern>/admin/attachment/save*</pattern>
+        <pattern>/updatepv*</pattern>
+        <pattern>/mobile/*</pattern>
+        <pattern>/static/tiny_mce/*</pattern>
+        <pattern>/robots.txt</pattern>
+    </excludes>
+
+    <!-- 如果例外页面使用不好的话，可以采用模板应用范围控制来决绝问题 -->
+    <decorator name="admin" page="admin.jsp">
+        <pattern>/admin/*</pattern>
+    </decorator>
+    <decorator name="front" page="front.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>

@@ -1,14 +1,5 @@
 package cms.web.admin;
 
-import java.net.URL;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import cms.myenum.UserEnum;
-import cms.web.admin.base.BaseController;
-import cms.web.shiro.ShiroRealmImpl;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -17,25 +8,14 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import weibo4j.Account;
-//import weibo4j.Oauth;
-//import weibo4j.Users;
-//import weibo4j.http.AccessToken;
-//import weibo4j.org.json.JSONObject;
-//import weibo4j.util.WeiboConfig;
-import cms.po.User;
 import cms.service.UserService;
-
-//import com.qq.connect.api.OpenID;
-//import com.qq.connect.api.qzone.UserInfo;
-//import com.qq.connect.javabeans.qzone.UserInfoBean;
+import cms.web.admin.base.BaseController;
+import cms.web.shiro.ShiroDbRealm;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -44,7 +24,7 @@ public class LoginController extends BaseController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ShiroRealmImpl shiroDbRealm;
+    private ShiroDbRealm shiroDbRealm;
 
     @RequestMapping(value = "logout")
     public String logout() {
