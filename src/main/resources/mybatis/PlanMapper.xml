@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cms.mapper.PlanMapper">
+    <resultMap type="cms.po.Plan" id="plan">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="cancelReason" property="cancelReason"/>
+        <result column="level" property="levelEnum" typeHandler="cms.po.base.GenericEnumCodeHandler"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="createDate" property="createDate"/>
+        <result column="createBy" property="createBy"/>
+        <result column="updateDate" property="updateDate"/>
+        <result column="updateBy" property="updateBy"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+
+    <sql id="columns">title,content,cancelReason,level,status,sort,createDate,createBy,updateDate,updateBy,remarks</sql>
+    <sql id="table">plan</sql>
+
+    <insert id="insert" parameterType="cms.po.Plan" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO<include refid="table"/>(<include refid="columns"/>)
+        VALUES
+        (#{title},#{content},#{cancelReason},#{level},#{status},#{sort},now(),#{createBy},#{updateDate},#{updateBy},#{remarks})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        UPDATE
+        <include refid="table"/>
+        SET status = 1
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="cms.po.Plan">
+        UPDATE
+        <include refid="table"/>
+        SET title = #{title},
+        content = #{content},
+        cancelReason = #{cancelReason},
+        level = #{level},
+        status = #{status},
+        updateDate = now()
+        WHERE id = #{id}
+    </update>
+
+    <select id="getById" parameterType="int" resultMap="plan">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="plan">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY createDate DESC
+    </select>
+
+    <select id="getByPage" parameterType="cms.vo.Page" resultMap="plan">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        <include refid="sql_where"/>
+        ORDER BY createDate DESC
+        LIMIT #{start}, #{size}
+    </select>
+
+    <select id="getCountByPage" parameterType="cms.vo.Page" resultType="long">
+        SELECT COUNT(*)
+        FROM
+        <include refid="table"/>
+        <include refid="sql_where"/>
+    </select>
+
+    <sql id="sql_where">
+        <where>
+            <if test="conditions.cTitle!=''">
+                AND title like '%${conditions.cTitle}%'
+            </if>
+            <if test="conditions.cLevel!='-1'">
+                AND level = #{conditions.cLevel}
+            </if>
+            <if test="conditions.cStatus!=-1">
+                AND status = #{conditions.cStatus}
+            </if>
+        </where>
+    </sql>
+
+    <!--自定义-->
+</mapper>

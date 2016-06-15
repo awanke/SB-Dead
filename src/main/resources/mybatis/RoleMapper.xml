@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cms.mapper.RoleMapper">
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+
+    <resultMap type="cms.po.Role" id="role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="createDate" property="createDate"/>
+        <result column="createBy" property="createBy"/>
+        <result column="updateDate" property="updateDate"/>
+        <result column="updateBy" property="updateBy"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+
+    <sql id="columns">name,value,status,sort,createDate,createBy,updateDate,updateBy,remarks</sql>
+    <sql id="table">sys_role</sql>
+
+    <insert id="insert" parameterType="cms.po.Role" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (<include refid="columns"/>)
+        VALUES (#{name},#{value},#{status},#{sort},now(),#{createBy},#{updateDate},#{updateBy},#{remarks})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        UPDATE
+        <include refid="table"/>
+        SET status = 1
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="cms.po.Role">
+        UPDATE
+        <include refid="table"/>
+        SET name = #{name},
+        value = #{value},
+        sort = #{sort},
+        updateDate = now()
+        WHERE id = #{id}
+    </update>
+
+    <select id="getById" parameterType="int" resultMap="role">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="role">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY createDate DESC
+    </select>
+
+    <select id="getByPage" parameterType="cms.vo.Page" resultMap="role">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY createDate DESC
+        LIMIT #{start}, #{size}
+    </select>
+
+    <select id="getCountByPage" parameterType="cms.vo.Page" resultType="long">
+        SELECT COUNT(*)
+        FROM
+        <include refid="table"/>
+    </select>
+
+    <!--自定义-->
+
+    <select id="getByUserId" parameterType="int" resultMap="role">
+        SELECT r.*
+        FROM
+        <include refid="table"/>
+        r, sys_user_role ur
+        WHERE r.id=ur.roleId AND ur.userId=#{value}
+    </select>
+</mapper>

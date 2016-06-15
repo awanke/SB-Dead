@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cms.mapper.ArticleMapper">
+    <resultMap type="cms.po.Article" id="article">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="title" property="title"/>
+        <result column="keywords" property="keywords"/>
+        <result column="description" property="description"/>
+        <result column="source" property="source"/>
+        <result column="writer" property="writer"/>
+        <result column="content" property="content"/>
+        <result column="publishDate" property="publishDate"/>
+        <result column="catalogId" property="catalogId"/>
+        <result column="pageView" property="pageView"/>
+        <result column="environment" property="environment"/>
+        <result column="download" property="download"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="createDate" property="createDate"/>
+        <result column="createBy" property="createBy"/>
+        <result column="updateDate" property="updateDate"/>
+        <result column="updateBy" property="updateBy"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+
+    <sql id="columns">name,title,keywords,description,source,writer,content,publishDate,catalogId,pageView,environment,download,status,sort,createDate,createBy,updateDate,updateBy,remarks</sql>
+    <sql id="table">article</sql>
+
+    <insert id="insert" parameterType="cms.po.Article" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (<include refid="columns"/>)
+        VALUES (#{name},#{title},#{keywords},#{description},#{source},#{writer},#{content},now(),
+        #{catalogId},#{pageView},#{environment},#{download},#{status},#{sort},now(),#{createBy},#{updateDate},#{updateBy},#{remarks})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        UPDATE
+        <include refid="table"/>
+        SET status = 1,
+        updateDate = now()
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="cms.po.Article">
+        UPDATE
+        <include refid="table"/>
+        SET title = #{title},
+        keywords = #{keywords},
+        description = #{description},
+        source = #{source},
+        writer = #{writer},
+        content = #{content},
+        publishDate = #{publishDate},
+        catalogId = #{catalogId},
+        environment = #{environment},
+        status = #{status},
+        updateDate = now()
+        WHERE id = #{id}
+    </update>
+
+    <select id="getById" parameterType="int" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY createDate DESC
+    </select>
+
+    <select id="getByPage" parameterType="cms.vo.Page" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        <include refid="sql_where"/>
+        ORDER BY createDate DESC
+        LIMIT #{start}, #{size}
+    </select>
+
+    <select id="getCountByPage" parameterType="cms.vo.Page" resultType="long">
+        SELECT COUNT(*)
+        FROM
+        <include refid="table"/>
+        <include refid="sql_where"/>
+    </select>
+
+    <sql id="sql_where">
+        <where>
+            <if test="conditions.cTitle!=''">
+                AND title like '%${conditions.cTitle}%'
+            </if>
+            <if test="conditions.cCatalog!='-1'">
+                AND catalogId = #{conditions.cCatalog}
+            </if>
+            <if test="conditions.cSource!=-1">
+                AND source = #{conditions.cSource}
+            </if>
+            <if test="conditions.cStatus!=-1">
+                AND status = #{conditions.cStatus}
+            </if>
+        </where>
+    </sql>
+
+    <!--自定义-->
+
+    <!-- 更新文章浏览量 -->
+    <update id="updatePageView" parameterType="java.util.HashMap">
+        UPDATE
+        <include refid="table"/>
+        SET pageView = #{pageView}
+        WHERE id = #{id}
+    </update>
+
+    <select id="getByCatalogId" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        WHERE catalogId = #{catalogId} AND status = 3
+        ORDER BY createDate DESC
+    </select>
+
+    <select id="getByName" parameterType="int" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        WHERE name = #{name}
+    </select>
+
+    <select id="getPre" parameterType="java.util.HashMap" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        <![CDATA[
+		 WHERE createDate < #{createDate}
+		 AND catalogId = #{catalogId} AND status = 3
+		 ORDER BY createDate DESC LIMIT 0, 1
+		]]>
+    </select>
+
+    <select id="getNext" parameterType="java.util.HashMap" resultMap="article">
+        SELECT id,
+        <include refid="columns"/>
+        FROM
+        <include refid="table"/>
+        WHERE createDate > #{createDate}
+        AND catalogId = #{catalogId} AND status = 3
+        ORDER BY createDate ASC LIMIT 0, 1
+    </select>
+
+    <!--文章月份统计-->
+    <select id="getStatByMonth" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(publishDate,'%Y-%m') AS month,COUNT(*) AS count FROM
+        <include refid="table"/>
+        WHERE status = 3 GROUP BY month ORDER BY publishDate DESC;
+    </select>
+
+    <!--文章月份获取-->
+    <!--<select id="getAllByMonth" resultType="java.util.HashMap" resultType="java.util.HashMap">-->
+    <!--SELECT * FROM-->
+    <!--(SELECT DATE_FORMAT(publishDate,'%Y-%m') AS publishDateTmp,title FROM-->
+    <!--<include refid="table"/>-->
+    <!--WHERE status = 3) t-->
+    <!--WHERE t.publishDateTmp = "2013-10";-->
+    <!--</select>-->
+
+    <!--得到目录统计 -->
+    <!--<select id="getStatByCatalog" parameterType="java.util.HashMap" resultType="java.util.HashMap">-->
+    <!--SELECT catalog.name,catalog.folder,t.count FROM-->
+    <!--(SELECT count(*) AS count,catalogId FROM-->
+    <!--<include refid="table"/>-->
+    <!--WHERE status = #{status} GROUP BY catalogId) t,-->
+    <!--catalog-->
+    <!--WHERE t.catalogId = catalog.id;-->
+    <!--</select>-->
+</mapper>
