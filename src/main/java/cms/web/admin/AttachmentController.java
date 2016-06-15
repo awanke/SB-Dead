@@ -91,7 +91,7 @@ public class AttachmentController extends BaseController {
         Attachment attachment = new Attachment();
         attachment.setName(uploadFile.getOriginalFilename());
         attachment.setSize(FileUtils.byteCountToDisplaySize(uploadFile.getSize()));
-        attachment.setUrl(ConfigUtil.getValue("apache.htdocs.url") + url);
+        attachment.setUrl(ConfigUtil.getValue("website.url") + url);
         attachment.setCreateDate(new Date());
         attachmentService.insert(attachment);
 

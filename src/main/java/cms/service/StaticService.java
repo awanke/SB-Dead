@@ -99,7 +99,7 @@ public class StaticService {
      */
     private String static4Common(Article article, HttpServletRequest request) {
         // 处理内容中图片的相对路径
-        article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("apache.htdocs.url") + "$1\""));
+        article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("website.url") + "$1\""));
 
         // 获取相关文章
         List<Article> relativeArticles = SolrUtil.getRelated(article.getId(), 6);

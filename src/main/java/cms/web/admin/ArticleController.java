@@ -79,7 +79,7 @@ public class ArticleController extends BaseController {
 
         // 处理内容中图片的相对路径
         if (article.getContent() != null) {
-            article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("apache.htdocs.url") + "$1\""));
+            article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("website.url") + "$1\""));
         }
 
         model.addAttribute("article", article);
@@ -123,7 +123,7 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "preview")
     public String preview(@RequestParam String articleId, HttpServletRequest request) {
         articleService.preview(articleId, request);
-        return ConfigUtil.getValue("apache.htdocs.url") + "/article/" + articleId + ".html";
+        return ConfigUtil.getValue("website.url") + "/article/" + articleId + ".html";
     }
 
     /**
@@ -149,7 +149,7 @@ public class ArticleController extends BaseController {
         }
 
         // 有网友反应使用srping的@ResponseBody,并直接return 结果url的方式,在IE8下上传图片没反应
-        url = ConfigUtil.getValue("apache.htdocs.url") + url;
+        url = ConfigUtil.getValue("website.url") + url;
         try {
             response.getWriter().print(url);
         } catch (IOException e) {
