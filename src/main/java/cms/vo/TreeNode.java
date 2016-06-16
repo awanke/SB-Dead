@@ -3,6 +3,9 @@ package cms.vo;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * 树形
+ */
 public class TreeNode implements Serializable {
     private static final Long serialVersionUID = 1L;
     private Integer id;

@@ -17,35 +17,35 @@ import com.alibaba.druid.support.http.WebStatFilter;
 @Configuration
 public class DruidConfig {
 
-	@Bean
-	public ServletRegistrationBean druidServlet() {
-		return new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-	}
+    @Bean
+    public ServletRegistrationBean druidServlet() {
+        return new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+    }
 
-	@Bean
-	public DataSource druidDataSource(@Value("${spring.datasource.driverClassName}") String driver,
-			@Value("${spring.datasource.url}") String url, @Value("${spring.datasource.username}") String username,
-			@Value("${spring.datasource.password}") String password) {
-		DruidDataSource druidDataSource = new DruidDataSource();
-		druidDataSource.setDriverClassName(driver);
-		druidDataSource.setUrl(url);
-		druidDataSource.setUsername(username);
-		druidDataSource.setPassword(password);
+    @Bean
+    public DataSource druidDataSource(@Value("${spring.datasource.driverClassName}") String driver,
+                                      @Value("${spring.datasource.url}") String url, @Value("${spring.datasource.username}") String username,
+                                      @Value("${spring.datasource.password}") String password) {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setDriverClassName(driver);
+        druidDataSource.setUrl(url);
+        druidDataSource.setUsername(username);
+        druidDataSource.setPassword(password);
 
-		try {
-			druidDataSource.setFilters("stat, wall");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return druidDataSource;
-	}
+        try {
+            druidDataSource.setFilters("stat, wall");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return druidDataSource;
+    }
 
-	@Bean
-	public FilterRegistrationBean filterRegistrationBean() {
-		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-		filterRegistrationBean.setFilter(new WebStatFilter());
-		filterRegistrationBean.addUrlPatterns("/*");
-		filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-		return filterRegistrationBean;
-	}
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new WebStatFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        return filterRegistrationBean;
+    }
 }

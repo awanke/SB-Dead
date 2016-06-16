@@ -18,34 +18,34 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Configuration
 @EnableTransactionManagement
 public class MyBatisConfig implements TransactionManagementConfigurer {
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactory sqlSessionFactoryBean() {
-		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-		bean.setDataSource(dataSource);
-		bean.setTypeAliasesPackage("cms.po");
+    @Bean(name = "sqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactoryBean() {
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        bean.setTypeAliasesPackage("cms.po");
 
-		// 添加XML目录
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		try {
-			bean.setMapperLocations(resolver.getResources("classpath:mybatis/*.xml"));
-			return bean.getObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
+        // 添加XML目录
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            bean.setMapperLocations(resolver.getResources("classpath:mybatis/*.xml"));
+            return bean.getObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
-	@Bean
-	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-		return new SqlSessionTemplate(sqlSessionFactory);
-	}
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 
-	@Bean
-	@Override
-	public PlatformTransactionManager annotationDrivenTransactionManager() {
-		return new DataSourceTransactionManager(dataSource);
-	}
+    @Bean
+    @Override
+    public PlatformTransactionManager annotationDrivenTransactionManager() {
+        return new DataSourceTransactionManager(dataSource);
+    }
 }

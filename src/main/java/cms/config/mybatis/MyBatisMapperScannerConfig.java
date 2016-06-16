@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(MyBatisConfig.class)
 public class MyBatisMapperScannerConfig {
 
-	@Bean
-	public MapperScannerConfigurer mapperScannerConfigurer() {
-		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-		mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-		mapperScannerConfigurer.setBasePackage("cms.mapper");
-		return mapperScannerConfigurer;
-	}
+    @Bean
+    public MapperScannerConfigurer mapperScannerConfigurer() {
+        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
+        mapperScannerConfigurer.setBasePackage("cms.mapper");
+        return mapperScannerConfigurer;
+    }
 }

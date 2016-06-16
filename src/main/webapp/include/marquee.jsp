@@ -35,6 +35,7 @@
     }
 
 </style>
+
 <div id="mar-tab">
     <div id="mar-intab">
         <div id="mar-tab1">
@@ -44,6 +45,7 @@
         <div id="mar-tab2"></div>
     </div>
 </div>
+
 <script>
     // 数值越大,滚动越慢
     var speed = 30;
@@ -51,6 +53,7 @@
     var tab1 = document.getElementById("mar-tab1");
     var tab2 = document.getElementById("mar-tab2");
     tab2.innerHTML = tab1.innerHTML;
+
     function Marquee() {
         if (tab2.offsetWidth - tab.scrollLeft <= 0)
             tab.scrollLeft -= tab1.offsetWidth
@@ -58,10 +61,13 @@
             tab.scrollLeft++;
         }
     }
+
     var MyMar = setInterval(Marquee, speed);
+
     tab.onmouseover = function () {
         clearInterval(MyMar);
     };
+
     tab.onmouseout = function () {
         MyMar = setInterval(Marquee, speed);
     };

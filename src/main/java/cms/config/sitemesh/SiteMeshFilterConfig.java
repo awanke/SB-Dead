@@ -10,14 +10,14 @@ import com.opensymphony.sitemesh.webapp.SiteMeshFilter;
 @Configuration
 public class SiteMeshFilterConfig {
 
-	@Bean
-	public Validator validator() {
-		return new org.springframework.validation.beanvalidation.LocalValidatorFactoryBean();
-	}
+    @Bean
+    public Validator validator() {
+        return new org.springframework.validation.beanvalidation.LocalValidatorFactoryBean();
+    }
 
-	@Bean(name = "siteMeshFilter")
-	public SiteMeshFilter characterEncodingFilter() {
-		SiteMeshFilter bean = new SiteMeshFilter();
-		return bean;
-	}
+    @Bean(name = "siteMeshFilter")
+    public SiteMeshFilter characterEncodingFilter() {
+        SiteMeshFilter bean = new SiteMeshFilter();
+        return bean;
+    }
 }
