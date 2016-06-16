@@ -23,7 +23,7 @@ public class Article extends BaseEntity {
     /**
      * 三天内发布的文章
      */
-    public boolean isNew() {
+    public boolean isNewFlag() {
         if (this.getPublishDate() == null) {
             return false;
         }

@@ -13,7 +13,7 @@
             <c:set var="catalogId" value="${data.catalogId }${'' }"/>
             <li style="font-size: 15px;">
                 <a href="${ctx }/article/${data.id }">${data.title }</a>
-                <c:if test="${data.new}">
+                <c:if test="${data.newFlag}">
                     <%-- 近'3'天发布的文章则显示'new'图片 --%>
                     <img src="${ctx}/static/image/new.gif" alt="new" style="margin-top: -10px" title="近三天更新">
                 </c:if>
