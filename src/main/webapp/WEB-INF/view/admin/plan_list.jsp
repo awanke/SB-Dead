@@ -92,7 +92,7 @@
 
 <c:set var="params"
        value="cTitle=${page.conditions.cTitle }&cLevel=${page.conditions.cLevel }&cStatus=${page.conditions.cStatus }&"/>
-<%@ include file="/view/include/pagination.jsp" %>
+<%@ include file="/include/pagination.jsp" %>
 
 <script src="${ctx}/static/js/common.js"></script>
 <script type="text/javascript">

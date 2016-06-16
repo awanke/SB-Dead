@@ -15,55 +15,56 @@ import cms.web.shiro.ShiroDbRealm;
 
 @Configuration
 public class ShiroConfig {
-	private static Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+    private static Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-	@Bean(name = "ShiroDbRealm")
-	public ShiroDbRealm getShiroRealm() {
-		return new ShiroDbRealm();
-	}
+    @Bean(name = "shiroDbRealm")
+    public ShiroDbRealm getShiroRealm() {
+        return new ShiroDbRealm();
+    }
 
-	@Bean(name = "lifecycleBeanPostProcessor")
-	public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
-		return new LifecycleBeanPostProcessor();
-	}
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
 
-	@Bean
-	public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-		DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
-		daap.setProxyTargetClass(true);
-		return daap;
-	}
+    @Bean
+    public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
+        daap.setProxyTargetClass(true);
+        return daap;
+    }
 
-	@Bean(name = "securityManager")
-	public DefaultWebSecurityManager getDefaultWebSecurityManager() {
-		DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager();
-		dwsm.setRealm(getShiroRealm());
-		return dwsm;
-	}
+    @Bean(name = "securityManager")
+    public DefaultWebSecurityManager getDefaultWebSecurityManager() {
+        DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager();
+        dwsm.setRealm(getShiroRealm());
+        return dwsm;
+    }
 
-	@Bean
-	public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor() {
-		AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
-		aasa.setSecurityManager(getDefaultWebSecurityManager());
-		return new AuthorizationAttributeSourceAdvisor();
-	}
+    @Bean
+    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor() {
+        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
+        aasa.setSecurityManager(getDefaultWebSecurityManager());
+        return new AuthorizationAttributeSourceAdvisor();
+    }
 
-	@Bean(name = "shiroFilter")
-	public ShiroFilterFactoryBean getShiroFilterFactoryBean() {
-		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-		shiroFilterFactoryBean.setSecurityManager(getDefaultWebSecurityManager());
-		// 没有权限或者失败后跳转的页面
-		shiroFilterFactoryBean.setLoginUrl("/admin/");
-		shiroFilterFactoryBean.setSuccessUrl("/admin/article");
-		shiroFilterFactoryBean.setUnauthorizedUrl("/view/403.jsp");
+    @Bean(name = "shiroFilter")
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean() {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        shiroFilterFactoryBean.setSecurityManager(getDefaultWebSecurityManager());
+        // 没有权限或者失败后跳转的页面
+        shiroFilterFactoryBean.setLoginUrl("/admin/");
+        shiroFilterFactoryBean.setSuccessUrl("/admin/article");
+        // TODO
+        shiroFilterFactoryBean.setUnauthorizedUrl("/view/403.jsp");
 
-		filterChainDefinitionMap.put("/static/**", "anon");
-		filterChainDefinitionMap.put("/admin", "anon");
-		filterChainDefinitionMap.put("/admin/", "anon");
-		filterChainDefinitionMap.put("/admin/login", "anon");
-		filterChainDefinitionMap.put("/admin/**", "authc");
+        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/admin", "anon");
+        filterChainDefinitionMap.put("/admin/", "anon");
+        filterChainDefinitionMap.put("/admin/login", "anon");
+        filterChainDefinitionMap.put("/admin/**", "authc");
 
-		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-		return shiroFilterFactoryBean;
-	}
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        return shiroFilterFactoryBean;
+    }
 }

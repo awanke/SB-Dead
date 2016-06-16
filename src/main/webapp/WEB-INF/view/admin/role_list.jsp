@@ -57,7 +57,7 @@
     </table>
 </div>
 
-<%@ include file="/view/include/pagination.jsp" %>
+<%@ include file="/include/pagination.jsp" %>
 
 <script src="${ctx}/static/js/common.js"></script>
 <script type="text/javascript">

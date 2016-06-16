@@ -58,6 +58,6 @@
     <c:if test="${not empty page.conditions.kw}">
         <c:set var="params" value="${params }kw=${page.conditions.kw }&"/>
     </c:if>
-    <%@ include file="/view/include/pagination.jsp" %>
+    <%@ include file="/include/pagination.jsp" %>
 </div>
 

@@ -55,7 +55,7 @@
     </table>
 </div>
 
-<%@ include file="/view/include/pagination.jsp" %>
+<%@ include file="/include/pagination.jsp" %>
 <script type="text/javascript">
     function edit() {
         window.location.href = '${ctx}/admin/catalog/edit';

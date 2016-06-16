@@ -74,7 +74,7 @@
 </div>
 
 <c:set var="params" value="cName=${page.conditions.cName }&"/>
-<%@ include file="/view/include/pagination.jsp" %>
+<%@ include file="/include/pagination.jsp" %>
 
 <script src="${ctx}/static/js/common.js"></script>
 <script type="text/javascript">
