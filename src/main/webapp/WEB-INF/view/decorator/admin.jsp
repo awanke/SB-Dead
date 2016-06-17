@@ -31,7 +31,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="<c:if test="${currentTab == 'welcome' }">active</c:if>">
-                        <a target="_blank" href="${ctx }">首页</a>
+                        <a target="_blank" href="${ctx }/">首页</a>
                     </li>
 
                     <li class="dropdown <c:if test="${currentTab=='article' || currentTab=='catalog' }">active</c:if>">

@@ -13,6 +13,6 @@
     <title>500 错误</title>
 </head>
 <body>
-内部错误！
+Internal Server Error!
 </body>
 </html>

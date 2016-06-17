@@ -13,6 +13,6 @@
     <title>404 错误</title>
 </head>
 <body>
-文件未找到！
+Not Found！
 </body>
 </html>
