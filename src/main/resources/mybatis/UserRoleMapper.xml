@@ -3,7 +3,7 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="cms.mapper.UserRoleMapper">
-    <cache-ref namespace="cms.mapper.PermissionMapper"/>
+    <!--<cache-ref namespace="cms.mapper.PermissionMapper"/>-->
 
     <resultMap type="cms.po.UserRole" id="userRole">
         <id column="id" property="id"/>

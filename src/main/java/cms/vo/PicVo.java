@@ -2,6 +2,9 @@ package cms.vo;
 
 import java.io.Serializable;
 
+/**
+ * 图片返回
+ */
 public class PicVo implements Serializable {
     private static final long serialVersionUID = 1L;
     private int success;

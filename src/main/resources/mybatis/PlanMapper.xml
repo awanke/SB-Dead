@@ -3,6 +3,8 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="cms.mapper.PlanMapper">
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>-->
+
     <resultMap type="cms.po.Plan" id="plan">
         <id column="id" property="id"/>
         <result column="title" property="title"/>

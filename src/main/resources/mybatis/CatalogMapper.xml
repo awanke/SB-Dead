@@ -3,7 +3,7 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="cms.mapper.CatalogMapper">
-    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
 
     <resultMap type="cms.po.Catalog" id="catalog">
         <id column="id" property="id"/>
