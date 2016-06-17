@@ -1,12 +1,15 @@
 import cms.po.Catalog;
+import cms.utils.FastJsonUtil;
 import cms.utils.TreeUtil;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class TreeUtilTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         List<Catalog> list = new LinkedList<Catalog>();
 
         Catalog c1 = new Catalog();
@@ -38,6 +41,6 @@ public class TreeUtilTest {
         list.add(c3);
         list.add(c4);
 
-        TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(list));
+        System.out.println(FastJsonUtil.getJson(TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(list))));
     }
 }
