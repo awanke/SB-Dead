@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE type>
-<decorators defaultdir="/decorator/">
+<decorators defaultdir="/WEB-INF/view/decorator/">
     <!-- Any urls that are excluded will never be decorated by Sitemesh -->
     <excludes>
         <pattern>/admin</pattern>
