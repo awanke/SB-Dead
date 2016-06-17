@@ -6,14 +6,6 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<%-- 设置菜单选中状态专用 --%>
-<c:set var="servletPath" value="${pageContext.request.servletPath}"/>
-<c:set var="currentTab" value="${fn:substringAfter(servletPath, '/articles/catalog/')}"/>
-<c:if test="${empty currentTab }">
-    <c:set var="currentTab" value="${fn:substringAfter(servletPath, '/')}"/>
-    <c:set var="currentTab" value="${fn:split(currentTab, '.')[0]}"/>
-</c:if>
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
