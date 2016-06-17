@@ -51,6 +51,7 @@ public class ArticleSolrUtilTest {
         }
     }
 
+    @Test
     public void getRelated() {
         List<Article> articles = SolrUtil.getRelated(42, 5);
         for (Article article : articles) {
@@ -59,6 +60,7 @@ public class ArticleSolrUtilTest {
         Assert.assertTrue("solr未解析到相似文章数据", articles.size() > 0);
     }
 
+    @Test
     public void getAnalysis() {
         List<String> results = SolrUtil.getAnalysis("DevNote与大家分享开发实践经验");
         for (String word : results) {
@@ -66,6 +68,7 @@ public class ArticleSolrUtilTest {
         }
     }
 
+    @Test
     public void getSuggestions() {
         List<String> strs = SolrUtil.getSuggestions("\"solr 系\"");
         for (int i = 0; i < strs.size(); i++) {
