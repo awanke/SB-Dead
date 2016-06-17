@@ -61,6 +61,10 @@
                     <li class="<c:if test="${currentTab == 'system' }">active</c:if>">
                         <a href="${ctx }/admin/system">系统设置</a>
                     </li>
+
+                    <li class="<c:if test="${currentTab == 'system' }">active</c:if>">
+                        <a href="${ctx }/admin/druid">数据库监控</a>
+                    </li>
                 </ul>
 
                 <ul class="nav pull-right">
