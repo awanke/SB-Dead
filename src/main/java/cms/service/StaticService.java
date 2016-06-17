@@ -138,8 +138,9 @@ public class StaticService {
         params.put("baseURL", "http://" + RegexUtil.getRegexGroup("//(.*?)/", requestURL, 1));
         params.put("ctx", request.getContextPath());
 
-        String apacheHtdocsDir = ConfigUtil.getValue("apache.htdocs.dir");
-        String templatePath = ConfigUtil.getValue("static.template.dir");
+        String apacheHtdocsDir = request.getServletContext().getRealPath("/");
+        String templatePath = request.getServletContext().getRealPath("/") + "WEB-INF/view/template";
+
         String targetPath = apacheHtdocsDir + "/articleTemp" + "/" + article.getId() + ".html";
         FreeMarkerUtil.create(templatePath, "article.html", targetPath, params);
 

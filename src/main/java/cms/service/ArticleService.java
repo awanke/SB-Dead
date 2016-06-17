@@ -85,7 +85,7 @@ public class ArticleService {
 
     public void preview(String id, HttpServletRequest request) {
         Article article = articleMapper.getById(Integer.parseInt(id));
-        // staticService.staticOne(article, request);
+        staticService.staticOne(article, request);
     }
 
     public void updatePageView(int id, int num) {

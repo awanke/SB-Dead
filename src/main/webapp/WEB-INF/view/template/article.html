@@ -7,13 +7,13 @@
     <meta name="description" content="测试文章测试文章测试文章测试文章测试文章测试文章"/>
     <title>测试文章_Hong</title>
 
-    <link rel="shortcut icon" href="../../favicon.ico"/>
-    <link rel="stylesheet" href="../../static/css/basic.css">
-    <link rel="stylesheet" href="../../static/bootstrap2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../static/jquery/blitzer/jquery-ui.min.css">
+    <link rel="shortcut icon" href="http://localhost:8080/favicon.ico"/>
+    <link rel="stylesheet" href="http://localhost:8080/static/css/basic.css">
+    <link rel="stylesheet" href="http://localhost:8080/static/bootstrap2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/static/jquery/blitzer/jquery-ui.min.css">
 
-    <script src="../../static/jquery/jquery-1.10.2.min.js"></script>
-    <script src="../../static/bootstrap2/js/bootstrap.min.js"></script>
+    <script src="http://localhost:8080/static/jquery/jquery-1.10.2.min.js"></script>
+    <script src="http://localhost:8080/static/bootstrap2/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -23,7 +23,7 @@
 
         </h1>
 
-        <form class="navbar-form pull-right" style="margin-top: 20px;" id="kwform" action="../../">
+        <form class="navbar-form pull-right" style="margin-top: 20px;" id="kwform" action="http://localhost:8080/">
             <div class="input-append">
                 <input type="text" class="span4" placeholder="输入关键词查询" id="kw">
                 <button type="submit" class="btn">搜索</button>
@@ -41,31 +41,33 @@
                         <div class="nav-collapse collapse">
                             <ul class="nav" style="height:40px;">
                                 <li>
-                                    <a href="../../"><span>首页</span></a>
+                                    <a href="http://localhost:8080/"><span>首页</span></a>
                                 </li>
-                                <#list catalogList.items as data>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" href="${ctx }?catalog=${data.id}"
-                                           data-hover="dropdown">${data.name }
-                                        </a>
-                                        <#if data.items?has_content>
-                                            <ul class="dropdown-menu">
-                                                <#list data.items as data2>
-                                                    <li class="<#if data2.items?has_content>dropdown-submenu</#if>">
-                                                        <a href="${ctx }?catalog=${data2.id}">${data2.name }</a>
-                                                        <ul class="dropdown-menu">
-                                                            <#list data2.items as data3>
-                                                                <li class="<#if data3.items?has_content>dropdown-submenu</#if>">
-                                                                    <a href="${ctx }?catalog=${data3.id}">${data3.name}</a>
-                                                                </li>
-                                                            </#list>
-                                                        </ul>
-                                                    </li>
-                                                </#list>
-                                            </ul>
-                                        </#if>
-                                    </li>
-                                </#list>
+                                <#if catalogList.items?has_content>
+                                    <#list catalogList.items as data>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="${ctx }?catalog=${data.id}"
+                                               data-hover="dropdown">${data.name }
+                                            </a>
+                                            <#if data.items?has_content>
+                                                <ul class="dropdown-menu">
+                                                    <#list data.items as data2>
+                                                        <li class="<#if data2.items?has_content>dropdown-submenu</#if>">
+                                                            <a href="${ctx }?catalog=${data2.id}">${data2.name }</a>
+                                                            <ul class="dropdown-menu">
+                                                                <#list data2.items as data3>
+                                                                    <li class="<#if data3.items?has_content>dropdown-submenu</#if>">
+                                                                        <a href="${ctx }?catalog=${data3.id}">${data3.name}</a>
+                                                                    </li>
+                                                                </#list>
+                                                            </ul>
+                                                        </li>
+                                                    </#list>
+                                                </ul>
+                                            </#if>
+                                        </li>
+                                    </#list>
+                                </#if>
                             </ul>
                         </div>
                     </div>
@@ -90,11 +92,26 @@
                 <strong>&nbsp;分类目录</strong>
                 <select id="catalogId" style="width: 230px">
                     <option>选择目录</option>
-
-                    <option value="1">算法 &nbsp; (1)</option>
-
-                    <option value="2">Java &nbsp; (1)</option>
-
+                    <#if catalogList.items?has_content>
+                        <#list catalogList.items as data>
+                            <option value="${data.id}">${data.name } &nbsp; (${data.sum })</option>
+                            <#if data.items?has_content>
+                                <#list data.items as data2>
+                                    <option value="${data2.id}">&nbsp;&nbsp;&nbsp;${data2.name } &nbsp; (${data2.sum })
+                                    </option>
+                                    <#if data2.items?has_content>
+                                        <#list data2.items as data3>
+                                            <option value="${data3.id}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${data3.name
+                                                }
+                                                &nbsp;
+                                                (${data3.sum })
+                                            </option>
+                                        </#list>
+                                    </#if>
+                                </#list>
+                            </#if>
+                        </#list>
+                    </#if>
                 </select>
                 <hr>
 
@@ -121,24 +138,26 @@
                 <hr>
 
                 <div id="tagcloud">
-                    <#list catalogList.items as data>
-                        <a href="#">${data.name }</a>
-                        <#if data.items?has_content>
-                            <#list data.items as data2>
-                                <a href="#">${data2.name }</a>
-                                <#if data2.items?has_content>
-                                    <#list data2.items as data3>
-                                        <a href="#">${data3.name }</a>
-                                    </#list>
-                                </#if>
-                            </#list>
-                        </#if>
-                    </#list>
+                    <#if catalogList.items?has_content>
+                        <#list catalogList.items as data>
+                            <a href="#">${data.name }</a>
+                            <#if data.items?has_content>
+                                <#list data.items as data2>
+                                    <a href="#">${data2.name }</a>
+                                    <#if data2.items?has_content>
+                                        <#list data2.items as data3>
+                                            <a href="#">${data3.name }</a>
+                                        </#list>
+                                    </#if>
+                                </#list>
+                            </#if>
+                        </#list>
+                    </#if>
                 </div>
                 <hr>
             </div>
 
-            <link rel="stylesheet" type="text/css" href="../../static/editor_md/css/editormd.preview.css">
+            <link rel="stylesheet" type="text/css" href="http://localhost:8080/static/editor_md/css/editormd.preview.css">
 
             <div class="breadcrumb pull-left" style="width:840px;">
                 <blockquote>
@@ -200,15 +219,15 @@
                 </#if>
             </div>
 
-            <script src="../../static/jquery/jquery-1.10.2.min.js"></script>
-            <script src="../../static/editor_md/lib/marked.min.js"></script>
-            <script src="../../static/editor_md/lib/prettify.min.js"></script>
-            <script src="../../static/editor_md/lib/raphael.min.js"></script>
-            <script src="../../static/editor_md/lib/underscore.min.js"></script>
-            <script src="../../static/editor_md/lib/sequence-diagram.min.js"></script>
-            <script src="../../static/editor_md/lib/flowchart.min.js"></script>
-            <script src="../../static/editor_md/lib/jquery.flowchart.min.js"></script>
-            <script src="../../static/editor_md/js/editormd.min.js"></script>
+            <script src="http://localhost:8080/static/jquery/jquery-1.10.2.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/marked.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/prettify.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/raphael.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/underscore.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/sequence-diagram.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/flowchart.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/lib/jquery.flowchart.min.js"></script>
+            <script src="http://localhost:8080/static/editor_md/js/editormd.min.js"></script>
 
             <script type="text/javascript">
                 $(function () {
@@ -259,9 +278,9 @@
     </footer>
 </div>
 
-<script src="../../static/jquery/jquery-ui.js"></script>
-<script src="../../static/jquery/jquery.windstagball.js"></script>
-<script src="../../static/bootstrap2/js/bootstrap-hover-dropdown.min.js"></script>
+<script src="http://localhost:8080/static/jquery/jquery-ui.js"></script>
+<script src="http://localhost:8080/static/jquery/jquery.windstagball.js"></script>
+<script src="http://localhost:8080/static/bootstrap2/js/bootstrap-hover-dropdown.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $("#tagcloud").windstagball({
@@ -281,7 +300,7 @@
 
         // 智能搜索提示
         $("#kw").autocomplete({
-            source: "../../suggest"
+            source: "http://localhost:8080/suggest"
         });
     });
 </script>
