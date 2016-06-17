@@ -1,12 +1,19 @@
+/*右侧栏*/
 body {
     overflow-y: scroll;
 }
 
+/*右侧栏*/
+
+/*字体旋转*/
 .transform {
     transform: rotate(-2.5deg);
     float: left;
 }
 
+/*字体旋转*/
+
+/*标签云*/
 #tagcloud {
     position: relative;
     width: 300px;
@@ -42,3 +49,5 @@ body {
 #tagcloud .green {
     color: green;
 }
+
+/*标签云*/
