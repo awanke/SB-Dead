@@ -6,11 +6,10 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
+<!-- 文章列表 -->
 <div class="breadcrumb pull-left" style="width:840px;">
     <ul class="unstyled">
-        <!-- 文章列表 -->
         <c:forEach items="${page.datas }" var="data">
-            <c:set var="catalogId" value="${data.catalogId }${'' }"/>
             <li style="font-size: 15px;">
                 <a href="${ctx }/article/${data.id }">${data.title }</a>
                 <c:if test="${data.newFlag}">
@@ -39,6 +38,7 @@
                     </span>
                     <center>
                         <span>
+                            <c:set var="catalogId" value="${data.catalogId }${'' }"/>
                             <span class="icon-leaf"></span>&nbsp;${catalogs[catalogId].name}
                         </span>
                     </center>
@@ -60,4 +60,3 @@
     </c:if>
     <%@ include file="/WEB-INF/view/include/pagination.jsp" %>
 </div>
-
