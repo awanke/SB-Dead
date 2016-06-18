@@ -11,8 +11,7 @@ public class GlobalConfig {
 
     public static String staticPageSize = ConfigUtil.getValue("static.page.size");
 
-
-
-
     public static boolean isHex = ConfigUtil.getBooleanValue("password.is.stored.hex");
+
+    public static String path = ServletContextHolder.getRealPath();
 }
