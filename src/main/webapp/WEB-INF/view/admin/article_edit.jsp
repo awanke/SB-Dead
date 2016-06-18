@@ -74,7 +74,7 @@
         </div>
 
         <div class="control-group">
-            <label class="control-label">测试环境</label>
+            <label class="control-label">环境</label>
             <div class="controls">
                 <select class="span9" name="environment">
                     <option value="markdown">markdown</option>

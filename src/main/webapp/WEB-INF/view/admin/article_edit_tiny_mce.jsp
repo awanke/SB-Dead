@@ -116,7 +116,7 @@
         </div>
 
         <div class="control-group">
-            <label class="control-label">测试于</label>
+            <label class="control-label">环境</label>
             <div class="controls">
                 <input type="text" class="span4" placeholder="本代码测试通时的相关环境，版本等" name="environment"
                        value="${article.environment }" onKeyUp="replaceChineseComma(this)">
