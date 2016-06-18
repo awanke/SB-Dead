@@ -16,13 +16,13 @@
             <c:set var="description" value="${article.description}"></c:set>
         </c:when>
         <c:otherwise>
-            <c:set var="keywords" value="IT世界"></c:set>
-            <c:set var="description" value="IT世界"></c:set>
+            <c:set var="keywords" value="极限编程"></c:set>
+            <c:set var="description" value="极限编程"></c:set>
         </c:otherwise>
     </c:choose>
     <meta name="keywords" content="${keywords }"/>
     <meta name="description" content="${description }"/>
-    <title>${article.title }<c:if test="${not empty article.title}">_</c:if>Hong</title>
+    <title>${article.title }<c:if test="${not empty article.title}">_</c:if>极限编程</title>
 
     <link rel="shortcut icon" href="${ctx }/favicon.ico"/>
     <link rel="stylesheet" href="${ctx }/static/css/basic.css">
@@ -37,7 +37,7 @@
 <div class="container">
     <div class="content">
         <h1 class="transform">
-            <%--<a>程序设计笔记</a>--%>
+            <a>极限编程</a>
         </h1>
 
         <form class="navbar-form pull-right" style="margin-top: 20px;" id="kwform" action="${ctx }/">
@@ -165,7 +165,7 @@
     <footer>
         <div class="copyright">
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a target="_blank">Copyright © Hong.</a>
+            <a target="_blank">Copyright © 极限编程.</a>
         </div>
     </footer>
 </div>

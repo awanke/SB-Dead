@@ -15,7 +15,7 @@
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>welcome to Hong</title>
+    <title>极限编程</title>
 
     <link rel="shortcut icon" href="${ctx }/favicon.ico"/>
     <link rel="stylesheet" href="${ctx }/static/css/basic.css">
@@ -85,7 +85,7 @@
     <footer>
         <div class="copyright">
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a target="_blank">Copyright © Hong.</a>
+            <a target="_blank">Copyright © 极限编程.</a>
         </div>
     </footer>
 </div>
