@@ -95,6 +95,7 @@ public class Article extends BaseEntity {
     }
 
     public void setContent(String content) {
+        content = content.replace("<", "&lt;").replace(">", "&gt;");
         this.content = content;
     }
 
