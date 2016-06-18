@@ -1,8 +1,8 @@
 package cms.web.front;
 
+import cms.config.GlobalConfig;
 import cms.po.Attachment;
 import cms.service.AttachmentService;
-import cms.utils.ConfigUtil;
 import cms.web.admin.base.BaseController;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class FileDownLoadControl extends BaseController {
     @RequestMapping("/download/{id}")
     public void download(@PathVariable("id") int id, HttpServletRequest request, HttpServletResponse response) {
         Attachment attachment = attachmentService.getById(id);
-        String filePath = ConfigUtil.getValue("apache.htdocs.dir") + attachment.getUrl();
+        String filePath = GlobalConfig.realPath + attachment.getUrl();
         InputStream inputStream;
         try {
             String fileName = attachment.getName();

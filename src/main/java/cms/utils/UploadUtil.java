@@ -1,14 +1,15 @@
 package cms.utils;
 
-import java.io.File;
-import java.util.Date;
-
+import cms.config.GlobalConfig;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.Date;
 
 public class UploadUtil {
     private static Logger log = Logger.getLogger(UploadUtil.class);
@@ -30,7 +31,7 @@ public class UploadUtil {
         String dateDir = DateFormatUtils.format(new Date(), "yyyy/MM/dd/");
         String baseDir = "/upload/" + subdir + "/";
         String newName = RandomStringUtils.randomAlphanumeric(10) + "." + FilenameUtils.getExtension(fileName);
-        File targetFile = new File(ConfigUtil.getValue("apache.htdocs.dir") + baseDir + dateDir, newName);
+        File targetFile = new File(GlobalConfig.realPath + baseDir + dateDir, newName);
         if (!targetFile.exists()) {
             targetFile.mkdirs();
         }

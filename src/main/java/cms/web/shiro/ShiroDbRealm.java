@@ -1,12 +1,12 @@
 package cms.web.shiro;
 
+import cms.config.GlobalConfig;
 import cms.po.Permission;
 import cms.po.Role;
 import cms.po.User;
 import cms.service.PermissionService;
 import cms.service.RoleService;
 import cms.service.UserService;
-import cms.utils.ConfigUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -81,20 +81,16 @@ public class ShiroDbRealm extends AuthorizingRealm {
      * 注意SHA-384,SHA-512哈希加密需占更长字节存储(打印出来可以数一下字符长度)
      */
     public String encrytPassword(String password) {
-        // 获取凭证子类配置
-        String hashAlgorithmName = ConfigUtil.getValue("password.hash.algorithm.name");
-        int iterations = ConfigUtil.getIntValue("password.iterations");
-        boolean isStoredHex = ConfigUtil.getBooleanValue("password.is.stored.hex");
         // 散列
         DefaultHashService hashService = new DefaultHashService();
         // 设置算法
-        hashService.setHashAlgorithmName(hashAlgorithmName);
+        hashService.setHashAlgorithmName(GlobalConfig.passwordHashAlgorithmName);
         // 迭代次数
-        hashService.setHashIterations(iterations);
+        hashService.setHashIterations(GlobalConfig.passwordIterations);
         // 获取字节
         ByteSource byteSource = ByteSource.Util.bytes(password);
         Hash hash = hashService.computeHash(new HashRequest.Builder().setSource(byteSource).build());
         // 生成Hash值
-        return isStoredHex ? hash.toHex() : hash.toBase64();
+        return GlobalConfig.passwordIsStoredHex ? hash.toHex() : hash.toBase64();
     }
 }

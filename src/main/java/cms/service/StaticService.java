@@ -1,9 +1,9 @@
 package cms.service;
 
+import cms.config.GlobalConfig;
 import cms.myenum.ArticleEnum;
 import cms.po.Article;
 import cms.solr.SolrUtil;
-import cms.utils.ConfigUtil;
 import cms.utils.FreeMarkerUtil;
 import cms.utils.RegexUtil;
 import cms.utils.TreeUtil;
@@ -45,7 +45,7 @@ public class StaticService {
         // 文章总篇数
         long total = p.getCount();
         // 每次生成多少静态化页面
-        int size = Integer.parseInt(ConfigUtil.getValue("static.page.size"));
+        int size = Integer.parseInt(GlobalConfig.staticPageSize);
         // 一共多少页
         int pages = (int) total / size + 1;
         int current = 0;
@@ -77,7 +77,7 @@ public class StaticService {
             return "静态化失败!";
         }
 
-        String apacheHtdocsDir = ConfigUtil.getValue("apache.htdocs.dir");
+        String apacheHtdocsDir = GlobalConfig.realPath;
         try {
             FileUtils.deleteDirectory(new File(apacheHtdocsDir + "/article"));
         } catch (Exception e) {
@@ -99,7 +99,7 @@ public class StaticService {
      */
     private String static4Common(Article article, HttpServletRequest request) {
         // 处理内容中图片的相对路径
-        article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("website.url") + "$1\""));
+        article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + GlobalConfig.websiteUr + "$1\""));
 
         // 获取相关文章
         List<Article> relativeArticles = SolrUtil.getRelated(article.getId(), 6);
@@ -153,7 +153,7 @@ public class StaticService {
 
     public String staticOne(Article article, HttpServletRequest request) {
         String targetPath = this.static4Common(article, request);
-        String apacheHtdocsDir = ConfigUtil.getValue("apache.htdocs.dir");
+        String apacheHtdocsDir = GlobalConfig.realPath;
 
         try {
             FileUtils.copyFileToDirectory(new File(targetPath), new File(apacheHtdocsDir + "/article"));

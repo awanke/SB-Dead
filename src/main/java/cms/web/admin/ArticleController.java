@@ -1,11 +1,10 @@
 package cms.web.admin;
 
-import cms.po.Article;
-import cms.po.Catalog;
+import cms.config.GlobalConfig;
 import cms.myenum.ArticleEnum;
+import cms.po.Article;
 import cms.service.ArticleService;
 import cms.service.CatalogService;
-import cms.utils.ConfigUtil;
 import cms.utils.ImageUtil;
 import cms.utils.TreeUtil;
 import cms.utils.UploadUtil;
@@ -26,9 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -79,7 +76,7 @@ public class ArticleController extends BaseController {
 
         // 处理内容中图片的相对路径
         if (article.getContent() != null) {
-            article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("website.url") + "$1\""));
+            article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + GlobalConfig.websiteUr + "$1\""));
         }
 
         model.addAttribute("article", article);
@@ -123,7 +120,7 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "preview")
     public String preview(@RequestParam String articleId, HttpServletRequest request) {
         articleService.preview(articleId, request);
-        return ConfigUtil.getValue("website.url") + "/article/" + articleId + ".html";
+        return GlobalConfig.websiteUr + "/article/" + articleId + ".html";
     }
 
     /**
@@ -145,11 +142,11 @@ public class ArticleController extends BaseController {
 
         // 加水印
         if ("true".equals(watermark)) {
-            ImageUtil.pressText(ConfigUtil.getValue("apache.htdocs.dir") + url, "www.devnote.cn", "Times New Romas", Font.PLAIN, 16, Color.RED, 25, 10, 1.0f, 3, 70f);
+            ImageUtil.pressText(GlobalConfig.realPath + url, "www.devnote.cn", "Times New Romas", Font.PLAIN, 16, Color.RED, 25, 10, 1.0f, 3, 70f);
         }
 
         // 有网友反应使用srping的@ResponseBody,并直接return 结果url的方式,在IE8下上传图片没反应
-        url = ConfigUtil.getValue("website.url") + url;
+        url = GlobalConfig.websiteUr + url;
         try {
             response.getWriter().print(url);
         } catch (IOException e) {

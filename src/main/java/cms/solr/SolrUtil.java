@@ -1,8 +1,8 @@
 package cms.solr;
 
-import cms.po.Article;
+import cms.config.GlobalConfig;
 import cms.myenum.ArticleEnum;
-import cms.utils.ConfigUtil;
+import cms.po.Article;
 import cms.vo.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -34,10 +34,10 @@ public class SolrUtil {
     private static HttpSolrServer solrServer4SearchLog;
 
     static {
-        solrServer4Article = new HttpSolrServer(ConfigUtil.getValue("solr.url.article"));
+        solrServer4Article = new HttpSolrServer(GlobalConfig.solrUrlArticle);
         solrServer4Article.setConnectionTimeout(10000);
 
-        solrServer4SearchLog = new HttpSolrServer(ConfigUtil.getValue("solr.url.searchlog"));
+        solrServer4SearchLog = new HttpSolrServer(GlobalConfig.solrUrlSearchlog);
         solrServer4SearchLog.setConnectionTimeout(10000);
     }
 

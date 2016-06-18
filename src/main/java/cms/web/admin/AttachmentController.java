@@ -1,8 +1,8 @@
 package cms.web.admin;
 
+import cms.config.GlobalConfig;
 import cms.po.Attachment;
 import cms.service.AttachmentService;
-import cms.utils.ConfigUtil;
 import cms.utils.MyObjectMapper;
 import cms.utils.UploadUtil;
 import cms.vo.PicVo;
@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -91,7 +89,7 @@ public class AttachmentController extends BaseController {
         Attachment attachment = new Attachment();
         attachment.setName(uploadFile.getOriginalFilename());
         attachment.setSize(FileUtils.byteCountToDisplaySize(uploadFile.getSize()));
-        attachment.setUrl(ConfigUtil.getValue("website.url") + url);
+        attachment.setUrl(GlobalConfig.websiteUr + url);
         attachment.setCreateDate(new Date());
         attachmentService.insert(attachment);
 
@@ -109,7 +107,7 @@ public class AttachmentController extends BaseController {
     public Attachment delete(@RequestParam int id) {
         // 删除文件
         Attachment attachment = attachmentService.getById(id);
-        File file = new File(ConfigUtil.getValue("apache.htdocs.dir") + attachment.getUrl());
+        File file = new File(GlobalConfig.realPath + attachment.getUrl());
         file.delete();
 
         // 删除记录

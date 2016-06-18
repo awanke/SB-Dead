@@ -29,7 +29,7 @@ public class TestControl {
 
         System.out.println(ServletContextHolder.getRealPath());
 
-        System.out.println(GlobalConfig.path);
+        System.out.println(GlobalConfig.realPath);
         return "test";
     }
 }

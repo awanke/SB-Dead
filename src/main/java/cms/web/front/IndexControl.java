@@ -1,13 +1,12 @@
 package cms.web.front;
 
+import cms.config.GlobalConfig;
 import cms.myenum.CatalogEnum;
-import cms.po.Catalog;
 import cms.po.SearchLog;
 import cms.service.ArticleService;
 import cms.service.CatalogService;
 import cms.service.SearchLogService;
 import cms.solr.SolrUtil;
-import cms.utils.ConfigUtil;
 import cms.utils.TreeUtil;
 import cms.vo.Page;
 import cms.web.admin.base.BaseController;
@@ -18,12 +17,10 @@ import org.apache.solr.client.solrj.util.ClientUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -88,7 +85,7 @@ public class IndexControl extends BaseController {
         model.addAttribute("monthStat", articleService.getStatByMonth());
         model.addAttribute("catalogList", TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(catalogService.getAll())));
         model.addAttribute("CATALOG_TUTORIAL", CatalogEnum.CATALOG_TUTORIAL);
-        model.addAttribute("APACHE_HTDOCS_URL", ConfigUtil.getValue("website.url"));
+        model.addAttribute("APACHE_HTDOCS_URL", GlobalConfig.websiteUr);
 
         return "home";
     }

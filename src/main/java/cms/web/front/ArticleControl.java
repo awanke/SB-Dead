@@ -1,13 +1,12 @@
 package cms.web.front;
 
-import cms.myenum.ArticleEnum;
+import cms.config.GlobalConfig;
 import cms.po.Article;
 import cms.po.Attachment;
 import cms.service.ArticleService;
 import cms.service.AttachmentService;
 import cms.service.CatalogService;
 import cms.solr.SolrUtil;
-import cms.utils.ConfigUtil;
 import cms.utils.MyObjectMapper;
 import cms.utils.RegexUtil;
 import cms.utils.TreeUtil;
@@ -24,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -49,7 +46,7 @@ public class ArticleControl extends BaseController {
         SolrUtil.update(article);
 
         // 处理内容中图片的相对路径
-        article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + ConfigUtil.getValue("website.url") + "$1\""));
+        article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + GlobalConfig.websiteUr + "$1\""));
         // 移动客户端文章正文中的相对站内地址需要加mobile前缀
         article.setContent(article.getContent().replaceAll("<a href=\"(/article/.*?)\"", "<a href=\"/mobile" + "$1\""));
 
