@@ -76,8 +76,10 @@
         <div class="control-group">
             <label class="control-label">测试环境</label>
             <div class="controls">
-                <input type="text" class="span9" name="environment" value="${article.environment }"
-                       onKeyUp="replaceChineseComma(this)">
+                <select class="span9" name="environment">
+                    <option value="markdown">markdown</option>
+                    <option value="其他">其他</option>
+                </select>
             </div>
         </div>
 
@@ -120,9 +122,9 @@
             editorTheme: "pastel-on-dark",
             syncScrolling: "single",
             path: "${ctx}/static/editor_md/lib/",
-            imageUpload : true,
-            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : '${ctx }/admin/attachment/savePic;jsessionid=${pageContext.session.id}'
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: '${ctx }/admin/attachment/savePic;jsessionid=${pageContext.session.id}'
         });
     });
 
