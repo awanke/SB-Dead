@@ -8,40 +8,43 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 
 public class UploadUtil {
     private static Logger log = Logger.getLogger(UploadUtil.class);
     /**
-     * 用于保存附件的目录
+     * 附件目录
      */
     public static final String SUBDIR_ATTACHMENT = "attachment";
     /**
-     * 用于保存图片的目录
+     * 图片目录
      */
     public static final String SUBDIR_IMAGE = "image";
 
-    /**
-     * @param subdir attachment,image
-     */
     public static String upload(MultipartFile file, String subdir) {
-        // 上传图片
-        String fileName = file.getOriginalFilename();
         String dateDir = DateFormatUtils.format(new Date(), "yyyy/MM/dd/");
         String baseDir = "/upload/" + subdir + "/";
-        String newName = RandomStringUtils.randomAlphanumeric(10) + "." + FilenameUtils.getExtension(fileName);
+        String newName = RandomStringUtils.randomAlphanumeric(10) + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+
         File targetFile = new File(GlobalConfig.realPath + baseDir + dateDir, newName);
-        if (!targetFile.exists()) {
-            targetFile.mkdirs();
+
+        if (!targetFile.getParentFile().exists()) {
+            targetFile.getParentFile().mkdirs();
         }
-        // 保存
+
         try {
-            file.transferTo(targetFile);
+            byte[] bytes = file.getBytes();
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(targetFile));
+            stream.write(bytes);
+            stream.close();
         } catch (Exception e) {
             log.error("上传错误", e);
             return StringUtils.EMPTY;
         }
+
         return baseDir + dateDir + newName;
     }
 }

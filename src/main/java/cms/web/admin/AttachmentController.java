@@ -80,8 +80,7 @@ public class AttachmentController extends BaseController {
     @RequiresPermissions("attachment:save")
     @RequestMapping(value = "savePic")
     public PicVo savePic(@RequestParam(value = "editormd-image-file") MultipartFile uploadFile) {
-
-        String url = UploadUtil.upload(uploadFile, UploadUtil.SUBDIR_ATTACHMENT);
+        String url = UploadUtil.upload(uploadFile, UploadUtil.SUBDIR_IMAGE);
         if (StringUtils.isBlank(url)) {
             return null;
         }
