@@ -3,8 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <meta name="keywords" content="测试文章,测试文章,测试文章,测试文章,测试文章"/>
-    <meta name="description" content="测试文章测试文章测试文章测试文章测试文章测试文章"/>
+    <#if article.keywords?has_content>
+        <meta name="keywords" content="${article.keywords}"/>
+        <meta name="description" content="${article.description}"/>
+        <#else>
+            <meta name="keywords" content="IT世界"/>
+            <meta name="description" content="IT世界"/>
+    </#if>
+
     <title>测试文章_Hong</title>
 
     <link rel="shortcut icon" href="http://localhost:8080/favicon.ico"/>
@@ -157,7 +163,8 @@
                 <hr>
             </div>
 
-            <link rel="stylesheet" type="text/css" href="http://localhost:8080/static/editor_md/css/editormd.preview.css">
+            <link rel="stylesheet" type="text/css"
+                  href="http://localhost:8080/static/editor_md/css/editormd.preview.css">
 
             <div class="breadcrumb pull-left" style="width:840px;">
                 <blockquote>
@@ -292,7 +299,7 @@
 
         function oncatalogChange() {
             if (catalogDropdown.options[catalogDropdown.selectedIndex].value > 0) {
-                location.href = "/dead?catalog=" + catalogDropdown.options[catalogDropdown.selectedIndex].value;
+                location.href = "/?catalog=" + catalogDropdown.options[catalogDropdown.selectedIndex].value;
             }
         }
 
