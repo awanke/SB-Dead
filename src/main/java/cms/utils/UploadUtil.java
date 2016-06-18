@@ -45,6 +45,6 @@ public class UploadUtil {
             return StringUtils.EMPTY;
         }
 
-        return baseDir + dateDir + newName;
+        return GlobalConfig.websiteUr +baseDir + dateDir + newName;
     }
 }

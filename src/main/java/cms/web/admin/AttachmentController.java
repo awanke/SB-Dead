@@ -44,7 +44,6 @@ public class AttachmentController extends BaseController {
     @RequiresPermissions("attachment:save")
     @RequestMapping(value = "save")
     public ResponseEntity<String> save(@RequestParam MultipartFile uploadFile, @RequestParam int articleId) {
-
         String url = UploadUtil.upload(uploadFile, UploadUtil.SUBDIR_ATTACHMENT);
         if (StringUtils.isBlank(url)) {
             return null;
@@ -65,12 +64,11 @@ public class AttachmentController extends BaseController {
         } catch (Exception e) {
             log.error("上传附件时写json错误", e);
         }
+
         HttpHeaders responseHeaders = new HttpHeaders();
         MediaType mediaType = new MediaType("text", "html", Charset.forName("UTF-8"));
-
         responseHeaders.setContentType(mediaType);
-        ResponseEntity<String> responseEntity = new ResponseEntity<String>(
-                body, responseHeaders, HttpStatus.CREATED);
+        ResponseEntity<String> responseEntity = new ResponseEntity<String>(body, responseHeaders, HttpStatus.CREATED);
 
         return responseEntity;
     }
@@ -85,17 +83,10 @@ public class AttachmentController extends BaseController {
             return null;
         }
 
-        Attachment attachment = new Attachment();
-        attachment.setName(uploadFile.getOriginalFilename());
-        attachment.setSize(FileUtils.byteCountToDisplaySize(uploadFile.getSize()));
-        attachment.setUrl(GlobalConfig.websiteUr + url);
-        attachment.setCreateDate(new Date());
-        attachmentService.insert(attachment);
-
         PicVo pv = new PicVo();
         pv.setMessage("success");
         pv.setSuccess(1);
-        pv.setUrl(attachment.getUrl());
+        pv.setUrl(url);
         return pv;
     }
 
