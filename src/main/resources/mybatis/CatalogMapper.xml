@@ -46,6 +46,7 @@
         SET name = #{name},
         folder = #{folder},
         deep = #{deep},
+        pid = #{pid},
         sort = #{sort},
         updateDate = now()
         WHERE id = #{id}
