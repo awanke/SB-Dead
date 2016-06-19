@@ -89,4 +89,9 @@ public class IndexControl extends BaseController {
 
         return "home";
     }
+
+    @RequestMapping("/aboutme")
+    public String aboutme() {
+        return "aboutme";
+    }
 }
