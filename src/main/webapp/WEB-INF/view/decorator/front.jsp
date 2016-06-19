@@ -84,7 +84,7 @@
                                     </li>
                                 </c:forEach>
                                 <li>
-                                    <a href="${ctx }/aboutme"><span>关于我</span></a>
+                                    <a href="${ctx }/aboutme"><span>关于</span></a>
                                 </li>
                             </ul>
                         </div>
