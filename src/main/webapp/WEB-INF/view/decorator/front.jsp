@@ -121,11 +121,11 @@
                 </select>
                 <hr>
 
-                <div>
-                    <iframe width="100%" height="100" class="share_self" frameborder="0" scrolling="no"
-                            src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=2199178482&verifier=607c53d8&dpc=1"></iframe>
-                </div>
-                <hr>
+                <%--<div>--%>
+                    <%--<iframe width="100%" height="100" class="share_self" frameborder="0" scrolling="no"--%>
+                            <%--src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=2199178482&verifier=607c53d8&dpc=1"></iframe>--%>
+                <%--</div>--%>
+                <%--<hr>--%>
 
                 <div>
                     <embed src="http://www.xiami.com/widget/44213257_3621488,174652,_235_346_FF8719_494949_0/multiPlayer.swf"
@@ -176,8 +176,8 @@
 <script type="text/javascript">
     $(function () {
         $("#tagcloud").windstagball({
-            radius: 120,
-            speed: 1
+            radius: 110,
+            speed: 8
         });
 
         var catalogDropdown = document.getElementById("catalogId");

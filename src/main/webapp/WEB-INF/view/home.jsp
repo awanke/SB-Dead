@@ -22,10 +22,11 @@
                             int r = (int) (Math.random() * 650);
                         %>
                         <img class="media-object" src="${ctx }/static/pic/<%=r%>.png"
-                             style="width: 100px;height: 100px;">
+                             style="width: 90px;height: 90px;">
                     </a>
                     <div class="media-body">
-                        <div style="color:#776955;margin-left: 30px">${data.description }</div>
+                        <c:set var="content" value="${data.content.substring(0,200) }......" />
+                        <div style="color:#776955;margin-left: 30px">${content}</div>
                     </div>
                 </div>
                 <div style="margin: 10px">

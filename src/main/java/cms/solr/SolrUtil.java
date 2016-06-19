@@ -237,6 +237,7 @@ public class SolrUtil {
                 String title = doc.getFieldValue("title").toString();
                 String description = doc.getFieldValue("description").toString();
                 String writer = doc.getFieldValue("writer").toString();
+                String content = doc.getFieldValue("content").toString();
                 Date publishDate = (Date) doc.getFieldValue("publishDate");
                 int catalogId = Integer.parseInt(doc.getFieldValue("catalogId").toString());
                 int pageView = Integer.parseInt(doc.getFieldValue("pageView").toString());
@@ -249,6 +250,7 @@ public class SolrUtil {
                 article.setTitle(title);
                 article.setDescription(description);
                 article.setWriter(writer);
+                article.setContent(content);
                 article.setPublishDate(publishDate);
                 article.setCatalogId(catalogId);
                 article.setPageView(pageView);

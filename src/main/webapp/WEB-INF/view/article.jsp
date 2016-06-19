@@ -10,7 +10,7 @@
 
 <div class="breadcrumb pull-left" style="width:840px;">
     <blockquote>
-        <p>${article.title }</p>
+        <p><strong class="text-success">${article.source }</strong>&nbsp;${article.title }</p>
         <small>
             作者：${article.writer },&nbsp;&nbsp;
 
@@ -121,4 +121,3 @@
     };
     with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
 </script>
-</body>
