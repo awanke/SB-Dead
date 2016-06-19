@@ -37,7 +37,7 @@ public class TreeUtil {
             if (treeNode.getPid() == 0) {
                 root.addChild(treeNode);
             } else {
-                TreeNode tn = getChildById(root, treeNode);
+                TreeNode tn = getChildById(list, treeNode);
 
                 tn.addChild(treeNode);
             }
@@ -47,29 +47,15 @@ public class TreeUtil {
         return root;
     }
 
-    private static TreeNode getChildById(TreeNode root, TreeNode treeNode) {
+    private static TreeNode getChildById(List<TreeNode> list, TreeNode treeNode) {
         Integer pId = treeNode.getPid();
         Integer deep = treeNode.getDeep();
 
-        List<TreeNode> searchPlace = root.getItems();
-
-        for (int i = 1; i < deep; ++i) {
-            if (i == deep - 1) {
-                for (TreeNode tn : searchPlace) {
-                    if (tn.getId() == pId) {
-                        return tn;
-                    }
+        for (TreeNode tn : list) {
+            if (tn.getDeep() == deep - 1) {
+                if (tn.getId() == pId) {
+                    return tn;
                 }
-            } else {
-                List<TreeNode> temp = new LinkedList<TreeNode>();
-                for (TreeNode tn : searchPlace) {
-                    if (tn.getItems() != null) {
-                        for (TreeNode child : tn.getItems()) {
-                            temp.add(child);
-                        }
-                    }
-                }
-                searchPlace = temp;
             }
         }
         return null;
