@@ -60,6 +60,7 @@
             <th>
                 <input type="checkbox" id="selectall" name="selectall" onclick="selectAll('selectall', 'ids')">
             </th>
+            <th>id</th>
             <th class="span6">标题</th>
             <th>作者</th>
             <th>所属目录</th>
@@ -74,6 +75,9 @@
         <c:forEach items="${page.datas }" var="data">
             <tr>
                 <td><input type="checkbox" name="ids" value="${data.id }"></td>
+                <td>
+                    <a href="${ctx }/admin/article/edit?id=${data.id }">${data.id }</a>
+                </td>
                 <td>
                     <a href="${ctx }/admin/article/edit?id=${data.id }">${data.title }</a>
                 </td>
