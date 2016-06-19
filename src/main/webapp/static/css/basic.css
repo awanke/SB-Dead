@@ -11,6 +11,10 @@ body {
     float: left;
 }
 
+#content > p {
+    margin: 0 0 25px 0;
+}
+
 /*字体旋转*/
 
 /*标签云*/
