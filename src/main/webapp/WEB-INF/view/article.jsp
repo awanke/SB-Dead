@@ -10,7 +10,7 @@
 
 <div class="breadcrumb pull-left" style="width:840px;">
     <blockquote>
-        <p><strong class="text-success">${article.source }</strong>&nbsp;${article.title }</p>
+        <p>${article.title }</p>
         <small>
             作者：${article.writer },&nbsp;&nbsp;
 

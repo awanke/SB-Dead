@@ -25,7 +25,12 @@
                              style="width: 90px;height: 90px;">
                     </a>
                     <div class="media-body">
-                        <c:set var="content" value="${data.content.substring(0,200) }......" />
+                        <c:if test="${fn:length(data.content)>200}">
+                            <c:set var="content" value="${data.content.substring(0,200) }......"/>
+                        </c:if>
+                        <c:if test="${fn:length(data.content)<=200}">
+                            <c:set var="content" value="${data.content }"/>
+                        </c:if>
                         <div style="color:#776955;margin-left: 30px">${content}</div>
                     </div>
                 </div>
