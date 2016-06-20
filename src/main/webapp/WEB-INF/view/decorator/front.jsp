@@ -180,7 +180,7 @@
     $(function () {
         $("#tagcloud").windstagball({
             radius: 110,
-            speed: 8
+            speed: 3
         });
 
         var catalogDropdown = document.getElementById("catalogId");
