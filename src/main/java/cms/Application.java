@@ -6,9 +6,9 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource({"classpath:db-config.properties"})
-public class Appliaction {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Appliaction.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
