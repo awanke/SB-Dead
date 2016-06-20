@@ -420,8 +420,8 @@ public class SolrUtil {
 
     /**
      * 增量/全量建立索引
-     * http://localhost:8983/solr/collection1/dataimport?command=delta-import&clean=false&commit=true&entity=article&verbose=false&optimize=false
-     * http://localhost:8983/solr/collection1/dataimport?command=full-import&clean=true&commit=true&optimize=true
+     * http://localhost:8983/solr/article/dataimport?command=delta-import&clean=false&commit=true&entity=article&verbose=false&optimize=false
+     * http://localhost:8983/solr/article/dataimport?command=full-import&clean=true&commit=true&optimize=true
      *
      * @param entity, 对哪个核进行操作
      * @param delta   ture,增量建立索引;false,重建所有索引

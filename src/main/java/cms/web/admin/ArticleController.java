@@ -5,9 +5,7 @@ import cms.myenum.ArticleEnum;
 import cms.po.Article;
 import cms.service.ArticleService;
 import cms.service.CatalogService;
-import cms.utils.ImageUtil;
 import cms.utils.TreeUtil;
-import cms.utils.UploadUtil;
 import cms.vo.Page;
 import cms.web.admin.base.BaseController;
 import cms.web.shiro.ShiroUser;
@@ -19,12 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,34 +117,34 @@ public class ArticleController extends BaseController {
         return GlobalConfig.websiteUr + "/article/" + articleId + ".html";
     }
 
-    /**
-     * 从编辑器上传图片
-     *
-     * @param watermark 是否加水印,默认是加水印的.
-     *                  原创图片有加水印的需要,来源于其他网站的图片,不宜再加水印.
-     * @param file      上传的图片
-     */
-    @RequiresPermissions("article:upload")
-    @RequestMapping(value = "uploadImage", method = RequestMethod.POST)
-    public void uploadImage(
-            @RequestParam(value = "watermark", defaultValue = "false") String watermark,
-            @RequestParam(value = "imageFile", required = false) MultipartFile file,
-            HttpServletResponse response) {
-
-        String url = UploadUtil.upload(file, UploadUtil.SUBDIR_IMAGE);
-        if (StringUtils.isBlank(url)) return;
-
-        // 加水印
-        if ("true".equals(watermark)) {
-            ImageUtil.pressText(GlobalConfig.realPath + url, "www.devnote.cn", "Times New Romas", Font.PLAIN, 16, Color.RED, 25, 10, 1.0f, 3, 70f);
-        }
-
-        // 有网友反应使用srping的@ResponseBody,并直接return 结果url的方式,在IE8下上传图片没反应
-        url = GlobalConfig.websiteUr + url;
-        try {
-            response.getWriter().print(url);
-        } catch (IOException e) {
-            log.error("上传图片时遇到错误", e);
-        }
-    }
+//    /**
+//     * 从编辑器上传图片
+//     *
+//     * @param watermark 是否加水印,默认是加水印的.
+//     *                  原创图片有加水印的需要,来源于其他网站的图片,不宜再加水印.
+//     * @param file      上传的图片
+//     */
+//    @RequiresPermissions("article:upload")
+//    @RequestMapping(value = "uploadImage", method = RequestMethod.POST)
+//    public void uploadImage(
+//            @RequestParam(value = "watermark", defaultValue = "false") String watermark,
+//            @RequestParam(value = "imageFile", required = false) MultipartFile file,
+//            HttpServletResponse response) {
+//
+//        String url = UploadUtil.upload(file, UploadUtil.SUBDIR_IMAGE);
+//        if (StringUtils.isBlank(url)) return;
+//
+//        // 加水印
+//        if ("true".equals(watermark)) {
+//            ImageUtil.pressText(GlobalConfig.realPath + url, "www.devnote.cn", "Times New Romas", Font.PLAIN, 16, Color.RED, 25, 10, 1.0f, 3, 70f);
+//        }
+//
+//        // 有网友反应使用srping的@ResponseBody,并直接return 结果url的方式,在IE8下上传图片没反应
+//        url = GlobalConfig.websiteUr + url;
+//        try {
+//            response.getWriter().print(url);
+//        } catch (IOException e) {
+//            log.error("上传图片时遇到错误", e);
+//        }
+//    }
 }

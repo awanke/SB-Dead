@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-import static com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation.ANONYMOUS.required;
-
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController extends BaseController {
