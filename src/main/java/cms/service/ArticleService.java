@@ -78,7 +78,7 @@ public class ArticleService {
             article.setPublishDate(new Date());
             articleMapper.update(article);
 
-            // staticService.staticOne(article, request);
+            SolrUtil.update(article);
         }
         SolrUtil.buildIndex(SolrUtil.ENTITY_ARTICLE, true);
     }
