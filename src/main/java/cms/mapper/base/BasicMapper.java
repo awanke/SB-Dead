@@ -43,6 +43,11 @@ public interface BasicMapper<T> {
     public List<T> getAll();
 
     /**
+     * 无条件获取所有对象
+     */
+    public List<T> getAll2();
+
+    /**
      * 根据查询对象获取多个对象
      */
     public List<Object> getByPage(Page page);

@@ -68,6 +68,10 @@
         ORDER BY deep ASC
     </select>
 
+    <select id="getAll2" resultMap="catalog">
+        select name,count(*) sum from (select catalog.`name`,catalog.deep from catalog,article where catalog.id = article.catalogId &amp;&amp; article.status = 3) t GROUP BY name ORDER BY deep ASC;
+    </select>
+
     <select id="getByPage" parameterType="cms.vo.Page" resultMap="catalog">
         SELECT id,
         <include refid="columns"/>

@@ -31,7 +31,11 @@ public class CatalogService {
         return catalogMapper.getAll();
     }
 
-    public Map<String, Catalog> getAll2() {
+    public List<Catalog> getAll2() {
+        return catalogMapper.getAll2();
+    }
+
+    public Map<String, Catalog> getAll3() {
         List<Catalog> catalogList = catalogMapper.getAll();
         Map<String, Catalog> catalogMap = new HashMap<String, Catalog>();
         for (Catalog catalog : catalogList) {

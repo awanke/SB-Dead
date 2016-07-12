@@ -83,7 +83,7 @@ public class IndexControl extends BaseController {
         model.addAttribute("page", page);
         model.addAttribute("catalogs", catalogService.getAll2());
         model.addAttribute("monthStat", articleService.getStatByMonth());
-        model.addAttribute("catalogList", TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(catalogService.getAll())));
+        model.addAttribute("catalogList", TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(catalogService.getAll2())));
         model.addAttribute("CATALOG_TUTORIAL", CatalogEnum.CATALOG_TUTORIAL);
         model.addAttribute("APACHE_HTDOCS_URL", GlobalConfig.websiteUr);
 
