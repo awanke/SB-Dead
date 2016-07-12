@@ -69,7 +69,7 @@
     </select>
 
     <select id="getAll2" resultMap="catalog">
-        select name,count(*) sum from (select catalog.`name`,catalog.deep from catalog,article where catalog.id = article.catalogId &amp;&amp; article.status = 3) t GROUP BY name ORDER BY deep ASC;
+        select id,pid,deep,name,count(*) sum from (select catalog.id,catalog.pid,catalog.deep,catalog.`name` from catalog left join article on catalog.id = article.catalogId &amp;&amp; article.status = 3) t GROUP BY id ORDER BY id ASC;
     </select>
 
     <select id="getByPage" parameterType="cms.vo.Page" resultMap="catalog">
