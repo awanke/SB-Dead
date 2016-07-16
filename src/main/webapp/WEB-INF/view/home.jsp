@@ -45,7 +45,7 @@
                     <center>
                         <span>
                             <c:set var="catalogId" value="${data.catalogId }${'' }"/>
-                            <span class="icon-leaf"></span>&nbsp;${catalogs[catalogId].name}
+                            <span class="icon-leaf"></span>&nbsp;${catalogs[catalogId-1].name}
                         </span>
                     </center>
                 </div>
