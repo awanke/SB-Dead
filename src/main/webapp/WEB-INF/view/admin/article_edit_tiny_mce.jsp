@@ -118,8 +118,11 @@
         <div class="control-group">
             <label class="control-label">环境</label>
             <div class="controls">
-                <input type="text" class="span4" placeholder="本代码测试通时的相关环境，版本等" name="environment"
-                       value="${article.environment }" onKeyUp="replaceChineseComma(this)">
+                <select class="span9" name="environment">
+                    <option value="tiny_mce">tiny_mce</option>
+                    <option value="markdown">markdown</option>
+                    <option value="其他">其他</option>
+                </select>
             </div>
         </div>
 

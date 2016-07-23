@@ -77,7 +77,11 @@ public class ArticleController extends BaseController {
         model.addAttribute("catalogList", TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(catalogService.getAll())));
         model.addAttribute("SOURCE_MAP", ArticleEnum.ARTICLE_SOURCE_MAP);
 
-        return "admin/article_edit";
+        if ("markdown".equals(article.getEnvironment())) {
+            return "admin/article_edit";
+        } else {
+            return "admin/article_edit_tiny_mce";
+        }
     }
 
     @RequiresPermissions("article:save")

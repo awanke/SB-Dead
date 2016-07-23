@@ -73,7 +73,11 @@ public class ArticleControl extends BaseController {
         String requestURL = request.getRequestURL().toString();
         model.addAttribute("baseURL", "http://" + RegexUtil.getRegexGroup("//(.*?)/", requestURL, 1));
 
-        return "article";
+        if ("markdown".equals(article.getEnvironment())) {
+            return "article";
+        } else {
+            return "article_tiny_mce";
+        }
     }
 
     /**

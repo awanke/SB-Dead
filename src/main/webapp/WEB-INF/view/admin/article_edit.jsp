@@ -78,6 +78,7 @@
             <div class="controls">
                 <select class="span9" name="environment">
                     <option value="markdown">markdown</option>
+                    <option value="tiny_mce">tiny_mce</option>
                     <option value="其他">其他</option>
                 </select>
             </div>

@@ -8,7 +8,7 @@
 
 <div class="breadcrumb pull-left" style="width:840px;">
     <blockquote>
-        <p><strong class="text-success">${article.source }</strong>&nbsp;${article.title }</p>
+        <p>${article.title }</p>
         <small>
             作者：<a href="${baseURL}${ctx }/articles/writer/${article.writer }">${article.writer }</a>，&nbsp;&nbsp;
 
@@ -29,7 +29,7 @@
         <strong>测试于：</strong>${article.environment }<br/><br/>
     </c:if>
 
-    ${article.content }
+    <c:out value="${article.content}" escapeXml="false" />
 
     <div id="attachments"></div>
     <hr/>
@@ -73,17 +73,6 @@
 </div>
 
 <script type="text/javascript">
-    $(function () {
-        var testEditormdView2 = editormd.markdownToHTML("test-editormd-view", {
-            htmlDecode: "style,script,iframe",  // you can filter tags decode
-            emoji: true,
-            taskList: true,
-            tex: true,  // 默认不解析
-            flowChart: true,  // 默认不解析
-            sequenceDiagram: true,  // 默认不解析
-        });
-    });
-
     window._bd_share_config = {
         "common": {
             "bdSnsKey": {},
