@@ -47,7 +47,8 @@
         </div>
     </form>
 
-    <input type="button" class="btn btn-small btn-primary" value="添加" onclick="edit();">
+    <input type="button" class="btn btn-small btn-primary" value="添加markdown" onclick="add('markdown');">
+    <input type="button" class="btn btn-small btn-primary" value="添加tiny_mce" onclick="add('tiny_mce');">
     <input type="button" class="btn btn-small" value="预览" onclick="preview();">
     <input type="button" class="btn btn-small btn-success" value="发布"
            onclick="doBatch('ids', '${ctx}/admin/article/publish?ids=');">
@@ -122,6 +123,10 @@
 
 <script src="${ctx}/static/js/common.js"></script>
 <script type="text/javascript">
+    function add(type) {
+        window.location.href = '${ctx}/admin/article/add?type=' + type;
+    }
+
     function edit() {
         window.location.href = '${ctx}/admin/article/edit';
     }

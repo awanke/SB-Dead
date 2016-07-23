@@ -60,14 +60,14 @@
         <div class="control-group">
             <label class="control-label">标题</label>
             <div class="controls">
-                <input type="text" class="span6" name="title" value="${article.title }">
+                <input type="text" class="span9" name="title" value="${article.title }">
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label">关键词</label>
             <div class="controls">
-                <input type="text" class="span4" placeholder="用于seo,每个词之间使用英文逗号分隔" name="keywords"
+                <input type="text" class="span9" placeholder="用于seo,每个词之间使用英文逗号分隔" name="keywords"
                        value="${article.keywords }" onKeyUp="replaceChineseComma(this)">
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="control-group">
             <label class="control-label">摘要</label>
             <div class="controls">
-                <textarea rows="4" class="span6" name="description">${article.description }</textarea>
+                <textarea rows="4" class="span9" name="description">${article.description }</textarea>
             </div>
         </div>
 
@@ -109,16 +109,14 @@
         <div class="control-group">
             <label class="control-label">正文</label>
             <div class="controls">
-				<textarea rows="40" class="span9" name="content">
-					<c:out value="${article.content }" escapeXml="true"/>
-				</textarea>
+                <textarea rows="40" class="span9" name="content"><c:out value="${article.content }" escapeXml="true"/></textarea>
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label">环境</label>
             <div class="controls">
-                <select class="span9" name="environment">
+                <select class="span8" name="environment">
                     <option value="tiny_mce">tiny_mce</option>
                     <option value="markdown">markdown</option>
                     <option value="其他">其他</option>

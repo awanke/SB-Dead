@@ -59,6 +59,21 @@ public class ArticleController extends BaseController {
         return "admin/article_list";
     }
 
+    @RequestMapping(value = "add")
+    public String add(@RequestParam String type, Model model) {
+        model.addAttribute("article", new Article());
+        model.addAttribute("catalogList", TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(catalogService.getAll())));
+        model.addAttribute("SOURCE_MAP", ArticleEnum.ARTICLE_SOURCE_MAP);
+
+        if ("markdown".equals(type)) {
+            return "admin/article_edit";
+        } else if ("tiny_mce".equals(type)) {
+            return "admin/article_edit_tiny_mce";
+        } else {
+            return "admin/article_edit_tiny_mce";
+        }
+    }
+
     @RequestMapping(value = "edit")
     public String edit(@RequestParam(value = "id", required = false) Integer id, Model model) {
         Article article = null;
