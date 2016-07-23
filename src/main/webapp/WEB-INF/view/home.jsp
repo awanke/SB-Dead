@@ -31,7 +31,7 @@
                         <c:if test="${fn:length(data.content)<=200}">
                             <c:set var="content" value="${data.content }"/>
                         </c:if>
-                        <div style="color:#776955;margin-left: 30px">${content}</div>
+                        <div style="color:#776955;margin-left: 30px"><c:out value="${content}" escapeXml="false" /></div>
                     </div>
                 </div>
                 <div style="margin: 10px">
