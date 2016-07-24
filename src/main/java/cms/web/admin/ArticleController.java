@@ -90,9 +90,9 @@ public class ArticleController extends BaseController {
         }
 
         // 处理内容中图片的相对路径
-        if (article.getContent() != null) {
-            article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + GlobalConfig.websiteUr + "$1\""));
-        }
+        // if (article.getContent() != null) {
+        //    article.setContent(article.getContent().replaceAll("<img src=\"(.*?)\"", "<img src=\"" + GlobalConfig.websiteUr + "$1\""));
+        // }
 
         model.addAttribute("article", article);
         model.addAttribute("catalogList", TreeUtil.baseTreeNode(TreeUtil.catalog2TreeNode(catalogService.getAll())));
