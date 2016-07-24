@@ -74,9 +74,9 @@ public class ArticleControl extends BaseController {
         model.addAttribute("baseURL", "http://" + RegexUtil.getRegexGroup("//(.*?)/", requestURL, 1));
 
         if ("markdown".equals(article.getEnvironment())) {
-            return "article";
+            return "article_markdown";
         } else {
-            return "article_tiny_mce";
+            return "article_wangEditor";
         }
     }
 

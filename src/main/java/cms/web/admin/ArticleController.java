@@ -72,11 +72,11 @@ public class ArticleController extends BaseController {
         model.addAttribute("SOURCE_MAP", ArticleEnum.ARTICLE_SOURCE_MAP);
 
         if ("markdown".equals(type)) {
-            return "admin/article_edit";
+            return "admin/article_edit_markdown";
         } else if ("tiny_mce".equals(type)) {
-            return "admin/article_edit_tiny_mce";
+            return "admin/article_edit_wangEditor";
         } else {
-            return "admin/article_edit_tiny_mce";
+            return "admin/article_edit_wangEditor";
         }
     }
 
@@ -99,9 +99,9 @@ public class ArticleController extends BaseController {
         model.addAttribute("SOURCE_MAP", ArticleEnum.ARTICLE_SOURCE_MAP);
 
         if ("markdown".equals(article.getEnvironment())) {
-            return "admin/article_edit";
+            return "admin/article_edit_markdown";
         } else {
-            return "admin/article_edit_tiny_mce";
+            return "admin/article_edit_wangEditor";
         }
     }
 

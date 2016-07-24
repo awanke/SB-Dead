@@ -73,10 +73,9 @@ public class AttachmentController extends BaseController {
         return responseEntity;
     }
 
-
     @ResponseBody
     @RequiresPermissions("attachment:save")
-    @RequestMapping(value = "savePic")
+    @RequestMapping(value = "markdownSavePic")
     public PicVo savePic(@RequestParam(value = "editormd-image-file") MultipartFile uploadFile) {
         String url = UploadUtil.upload(uploadFile, UploadUtil.SUBDIR_IMAGE);
         if (StringUtils.isBlank(url)) {
@@ -90,6 +89,16 @@ public class AttachmentController extends BaseController {
         return pv;
     }
 
+    @ResponseBody
+    @RequiresPermissions("attachment:save")
+    @RequestMapping(value = "wangEditorSavePic")
+    public String wangEditorSavePic(@RequestParam(value = "wangEditor-image-file") MultipartFile uploadFile) {
+        String url = UploadUtil.upload(uploadFile, UploadUtil.SUBDIR_IMAGE);
+        if (StringUtils.isBlank(url)) {
+            return null;
+        }
+        return url;
+    }
 
     @ResponseBody
     @RequiresPermissions("attachment:delete")

@@ -48,7 +48,7 @@
     </form>
 
     <input type="button" class="btn btn-small btn-primary" value="添加markdown" onclick="add('markdown');">
-    <input type="button" class="btn btn-small btn-primary" value="添加tiny_mce" onclick="add('tiny_mce');">
+    <input type="button" class="btn btn-small btn-primary" value="添加wangEditor" onclick="add('wangEditor');">
     <input type="button" class="btn btn-small" value="预览" onclick="preview();">
     <input type="button" class="btn btn-small btn-success" value="发布"
            onclick="doBatch('ids', '${ctx}/admin/article/publish?ids=');">
