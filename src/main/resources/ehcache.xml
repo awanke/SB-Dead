@@ -1,5 +1,4 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd"
-         updateCheck="false">
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd" updateCheck="false">
     <!--
     此配置文件从ehcache-core-2.6.5.jar根目录中拷贝而来，在第一行增加了属性updateCheck="false"，
     用于禁用项目启动时ehcache更新检查，其他配置可根据需要修改。

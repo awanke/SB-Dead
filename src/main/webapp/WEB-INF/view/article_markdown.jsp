@@ -32,7 +32,7 @@
     </c:if>
 
     <div id="test-editormd-view" style="width:815px;">
-        <textarea><c:out value="${article.content}" escapeXml="false" /></textarea>
+        <textarea><c:out value="${article.content}" escapeXml="true" /></textarea>
     </div>
 
     <div id="attachments"></div>
